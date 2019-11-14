@@ -18,7 +18,10 @@ if not torch.cuda.is_available():
 lr = 0.01
 batch_size = 128
 shape=(44,44)
-epochs = 250
+epochs = 300
+learning_rate_decay_start = 80
+learning_rate_decay_every = 5
+learning_rate_decay_rate = 0.9
 classes = ['Angry','Disgust','Fear','Happy','Sad','Surprise','Neutral']
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -33,8 +36,9 @@ class DataSetFactory:
         public_images = []
         public_emotions = []
 
-        with open('./dataset/fer2013/fer2013.csv', 'r') as csvin:
+        with open('../dataset/fer2013.csv', 'r') as csvin:
             data = csv.reader(csvin)
+            next(data)
             for row in data:
                 face = [int(pixel) for pixel in row[1].split()]
                 face = np.asarray(face).reshape(48, 48)
@@ -97,11 +101,6 @@ validation_loader = {
     'public': DataLoader(factory.public, batch_size=batch_size, shuffle=True, num_workers=1)
 }
 
-
-learning_rate_decay_start = 80
-learning_rate_decay_every = 5
-learning_rate_decay_rate = 0.9
-
 min_validation_loss = {
     'private': 10000,
     'public': 10000,
@@ -157,7 +156,7 @@ for epoch in range(epochs):
             if total_validation_loss <= min_validation_loss[name]:
                 print('saving new model')
                 state = {'net': network.state_dict()}
-                torch.save(state,'./trained/%s_model_%d_%d.t7' % (name, epoch + 1,  accuracy))
+                torch.save(state,'../trained/%s_model_%d_%d.t7' % (name, epoch + 1,  accuracy))
                 min_validation_loss[name] = total_validation_loss
 
             print('Epoch [%d/%d] %s validation Loss: %.4f, Accuracy: %.4f' % (name, epoch + 1, epochs, total_validation_loss.item() / (epoch + 1), accuracy))
