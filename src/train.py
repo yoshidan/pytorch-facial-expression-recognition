@@ -133,7 +133,7 @@ for epoch in range(epochs):
         total_train_loss += loss.data
         total += y_train.size(0)
         correct += predicted.eq(y_train.data).sum()
-    accuracy = 100. * correct / total
+    accuracy = 100. * float(correct) / total
     print('Epoch [%d/%d] Training Loss: %.4f, Accuracy: %.4f' % (epoch + 1, epochs, total_train_loss / (epoch + 1), accuracy))
 
     network.eval()
@@ -152,7 +152,7 @@ for epoch in range(epochs):
                 total += y_val.size(0)
                 correct += predicted.eq(y_val.data).sum()
 
-            accuracy = 100. * correct / total
+            accuracy = 100. * float(correct) / total
             if total_validation_loss <= min_validation_loss[name]:
                 print('saving new model')
                 state = {'net': network.state_dict()}
