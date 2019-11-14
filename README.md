@@ -2,7 +2,8 @@
 
 * Pytorch implementation for [Mini Xception](https://arxiv.org/pdf/1710.07557.pdf)
 * Author's original Keras implementation is [here](https://github.com/oarriaga/face_classification)
-* you can use as [ONNX](https://github.com/Microsoft/onnxjs)
+* Model size is about `250KB`
+* Run with using [ONNX.js](https://github.com/Microsoft/onnxjs) on WEB browser.
 
 ## Trained Model
 
@@ -18,7 +19,7 @@ Here is the sample image's `Emotion`, `Prob`, `GradCam`, `Guided BackProp` and `
 You can try real time FER on WEB browser.
 ```
 cd example
-http-server 8000
+http-server -p 8000
 ```
 
 open `http://localhost:8000`

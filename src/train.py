@@ -3,15 +3,18 @@ import torch.nn as nn
 import torchvision.transforms as transforms
 import numpy as np
 import model
+import csv
+import torch.onnx
 from PIL import Image
 from torchvision.transforms import ToTensor
 from torch.utils.data import DataLoader
-import csv
 
 if not torch.cuda.is_available():
     from torchsummary import summary
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+shape = (44, 44)
 
 
 class DataSetFactory:
@@ -43,7 +46,7 @@ class DataSetFactory:
                     public_images.append(Image.fromarray(face))
 
         print('training size %d : private val size %d : public val size %d' % (
-        len(images), len(private_images), len(public_images)))
+            len(images), len(private_images), len(public_images)))
         train_transform = transforms.Compose([
             transforms.RandomCrop(shape[0]),
             transforms.RandomHorizontalFlip(),
@@ -80,7 +83,6 @@ class DataSet(torch.utils.data.Dataset):
 def main():
     # variables  -------------
     batch_size = 128
-    shape = (44, 44)
     lr = 0.01
     epochs = 300
     learning_rate_decay_start = 80
@@ -114,6 +116,8 @@ def main():
         correct = 0
         total_train_loss = 0
         if epoch > learning_rate_decay_start and learning_rate_decay_start >= 0:
+
+            #
             frac = (epoch - learning_rate_decay_start) // learning_rate_decay_every
             decay_factor = learning_rate_decay_rate ** frac
             current_lr = lr * decay_factor
@@ -157,10 +161,12 @@ def main():
 
                 accuracy = 100. * float(correct) / total
                 if total_validation_loss <= min_validation_loss[name]:
-                    if epoch >= 10:
+                    if epoch >= 0:
                         print('saving new model')
                         state = {'net': network.state_dict()}
                         torch.save(state, '../trained/%s_model_%d_%d.t7' % (name, epoch + 1, accuracy))
+                        x = torch.randn(1, 1, shape[0], shape[1]).to(device)
+                        torch.onnx.export(network, x, '../trained/%s_model_%d_%d.onnx' % (name, epoch + 1, accuracy))
                     min_validation_loss[name] = total_validation_loss
 
                 print('Epoch [%d/%d] %s validation Loss: %.4f, Accuracy: %.4f' % (
