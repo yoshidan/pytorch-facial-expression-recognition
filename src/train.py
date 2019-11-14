@@ -154,9 +154,10 @@ for epoch in range(epochs):
 
             accuracy = 100. * float(correct) / total
             if total_validation_loss <= min_validation_loss[name]:
-                print('saving new model')
-                state = {'net': network.state_dict()}
-                torch.save(state,'../trained/%s_model_%d_%d.t7' % (name, epoch + 1,  accuracy))
+                if epoch >= 10:
+                    print('saving new model')
+                    state = {'net': network.state_dict()}
+                    torch.save(state,'../trained/%s_model_%d_%d.t7' % (name, epoch + 1,  accuracy))
                 min_validation_loss[name] = total_validation_loss
 
             print('Epoch [%d/%d] %s validation Loss: %.4f, Accuracy: %.4f' % (epoch + 1, epochs, name, total_validation_loss / (epoch + 1), accuracy))
