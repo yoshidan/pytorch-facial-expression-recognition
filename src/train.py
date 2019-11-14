@@ -137,11 +137,11 @@ for epoch in range(epochs):
     print('Epoch [%d/%d] Training Loss: %.4f, Accuracy: %.4f' % (epoch + 1, epochs, total_train_loss / (epoch + 1), accuracy))
 
     network.eval()
-    total = 0
-    correct = 0
-    total_validation_loss = 0
-    with torch.no_grad:
+    with torch.no_grad():
         for name in ['private', 'public']:
+            total = 0
+            correct = 0
+            total_validation_loss = 0
             for j, (x_val,y_val) in enumerate(validation_loader[name]):
                 x_val = x_val.to(device)
                 y_val = y_val.to(device)
@@ -159,4 +159,4 @@ for epoch in range(epochs):
                 torch.save(state,'../trained/%s_model_%d_%d.t7' % (name, epoch + 1,  accuracy))
                 min_validation_loss[name] = total_validation_loss
 
-            print('Epoch [%d/%d] %s validation Loss: %.4f, Accuracy: %.4f' % (name, epoch + 1, epochs, total_validation_loss.item() / (epoch + 1), accuracy))
+            print('Epoch [%d/%d] %s validation Loss: %.4f, Accuracy: %.4f' % (epoch + 1, epochs, name, total_validation_loss / (epoch + 1), accuracy))
