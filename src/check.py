@@ -19,7 +19,7 @@ classes = [
     'Fear',
     'Happy',
     'Sad',
-    'Surprise',
+    'Surprised',
     'Neutral'
 ]
 
@@ -102,11 +102,11 @@ def guided_backprop(images, model_name):
         regions = gcam.generate(target_layer='last_conv')
 
         # Get Images
-        label_image = np.zeros((shape[0],60,3), np.uint8)
-        cv2.putText(label_image, classes[actual_emotion.data], (5, 25), cv2.FONT_HERSHEY_PLAIN, 1, (255, 255, 255), 1, cv2.LINE_AA)
+        label_image = np.zeros((shape[0],65, 3), np.uint8)
+        cv2.putText(label_image, classes[actual_emotion.data], (5, 25), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255, 255, 255), 1, cv2.LINE_AA)
 
         prob_image = np.zeros((shape[0],60,3), np.uint8)
-        cv2.putText(prob_image, '%.1f%%' % (probs.data[:,0] * 100), (5, 25), cv2.FONT_HERSHEY_PLAIN, 1, (255, 255, 255), 1, cv2.LINE_AA)
+        cv2.putText(prob_image, '%.1f%%' % (probs.data[:,0] * 100), (5, 25), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
 
         guided_bpg_image = get_gradient_image(gradients[0])
         guided_bpg_image = cv2.merge((guided_bpg_image, guided_bpg_image, guided_bpg_image))
@@ -126,9 +126,10 @@ def guided_backprop(images, model_name):
 def main():
     guided_backprop(
         images=[
-            {'path': '../test/anger.jpg'},
+            {'path': '../test/angry.jpg'},
             {'path': '../test/happy.jpg'},
-            {'path': '../test/sadness.jpg'},
+            {'path': '../test/sad.jpg'},
+            {'path': '../test/surprised.jpg'},
         ],
         model_name='private_model_233_66.t7'
     )
