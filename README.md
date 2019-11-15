@@ -1,4 +1,4 @@
-# facial-expression-recognition-web
+# pytorch-facial-expression-recognition
 
 * Pytorch implementation for [Mini Xception](https://arxiv.org/pdf/1710.07557.pdf)
 * Author's original Keras implementation is [here](https://github.com/oarriaga/face_classification)
@@ -20,4 +20,5 @@ Here is the sample image's `Emotion`, `Prob`, `GradCam`, `Guided BackProp` and `
 ```
 cd src
 python train.py
+python check.py
 ```
