@@ -128,7 +128,7 @@ def main():
         images=[
             {'path': '../test/anger.jpg'},
             {'path': '../test/happy.jpg'},
-            {'path': '../test/sadness.png'},
+            {'path': '../test/sadness.jpg'},
         ],
         model_name='private_model_233_66.t7'
     )
