@@ -4,7 +4,6 @@ import torchvision.transforms as transforms
 import numpy as np
 import model
 import csv
-import torch.onnx
 from PIL import Image
 from torchvision.transforms import ToTensor
 from torch.utils.data import DataLoader
@@ -161,12 +160,10 @@ def main():
 
                 accuracy = 100. * float(correct) / total
                 if total_validation_loss <= min_validation_loss[name]:
-                    if epoch >= 0:
+                    if epoch >= 10:
                         print('saving new model')
                         state = {'net': network.state_dict()}
                         torch.save(state, '../trained/%s_model_%d_%d.t7' % (name, epoch + 1, accuracy))
-                        x = torch.randn(1, 1, shape[0], shape[1]).to(device)
-                        torch.onnx.export(network, x, '../trained/%s_model_%d_%d.onnx' % (name, epoch + 1, accuracy))
                     min_validation_loss[name] = total_validation_loss
 
                 print('Epoch [%d/%d] %s validation Loss: %.4f, Accuracy: %.4f' % (

@@ -130,7 +130,7 @@ def main():
             {'path': '../test/happy.jpg'},
             {'path': '../test/sadness.png'},
         ],
-        model_name='private_model_244_65.t7'
+        model_name='private_model_233_66.t7'
     )
 
 
