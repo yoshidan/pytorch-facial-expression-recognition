@@ -20,5 +20,5 @@ Emotion | Probability | Guided Backprop | Grad-Cam | Guided Grad-Cam
 ```
 cd src
 python train.py
-python check.py
+python check.py  #check.py supports cpu only
 ```
