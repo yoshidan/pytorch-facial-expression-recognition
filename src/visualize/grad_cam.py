@@ -1,9 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-#
-# Author:   Kazuto Nakashima
-# URL:      http://kazuto1011.github.io
-# Created:  2017-05-26
+# see https://github.com/kazuto1011/grad-cam-pytorch
 
 from collections import OrderedDict
 

@@ -1,5 +1,7 @@
 # pytorch-facial-expression-recognition
 
+Lightweight facial emotion recognition.
+
 * Pytorch implementation for [Mini Xception](https://arxiv.org/pdf/1710.07557.pdf) inspired by [Keras implementation](https://github.com/oarriaga/face_classification).
 * Model size is about `250KB`
 
@@ -22,3 +24,9 @@ cd src
 python train.py
 python check.py  #check.py supports cpu only
 ```
+
+## Reference
+
+* [Grad-CAM](https://github.com/kazuto1011/grad-cam-pytorch)
+* [Mini Xception](https://github.com/oarriaga/face_classification)
+* [Data Augmentation / Optimizer](https://github.com/WuJie1010/Facial-Expression-Recognition.Pytorch)
