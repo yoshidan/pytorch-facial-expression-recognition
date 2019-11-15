@@ -1,7 +1,6 @@
 # pytorch-facial-expression-recognition
 
-* Pytorch implementation for [Mini Xception](https://arxiv.org/pdf/1710.07557.pdf)
-* Author's original Keras implementation is [here](https://github.com/oarriaga/face_classification)
+* Pytorch implementation for [Mini Xception](https://arxiv.org/pdf/1710.07557.pdf) inspired by [Keras implementation](https://github.com/oarriaga/face_classification).
 * Model size is about `250KB`
 
 ## Trained Model
@@ -11,7 +10,8 @@ Trained by FER2013 dataset.
 * Private Data : 66%
 * Public Data : 64%
 
-Here is the sample image's `Emotion`, `Prob`, `GradCam`, `Guided BackProp` and `Guided GradCam`
+Here is the result of sample image.  
+Emotion | Probability | Guided Backprop | Grad-Cam | Guided Grad-Cam
 
 <img src="./test/guided_gradcam.jpg">
 
