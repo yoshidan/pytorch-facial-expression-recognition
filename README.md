@@ -28,5 +28,4 @@ python check.py  #check.py supports cpu only
 ## Reference
 
 * [Grad-CAM](https://github.com/kazuto1011/grad-cam-pytorch)
-* [Mini Xception](https://github.com/oarriaga/face_classification)
 * [Data Augmentation / Optimizer](https://github.com/WuJie1010/Facial-Expression-Recognition.Pytorch)
