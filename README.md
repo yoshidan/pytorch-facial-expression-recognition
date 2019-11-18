@@ -19,6 +19,9 @@ Emotion | Probability | Guided Backprop | Grad-Cam | Guided Grad-Cam
 
 ## Retrain
 
+1. see [here](./dataset/README.md) to prepare dataset.
+
+2. execute train.py
 ```
 cd src
 python train.py
